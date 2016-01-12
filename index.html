@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>卒業パーティー出欠連絡</title>
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name=viewport>
+    <script>
+        var chg = function () {
+            var num = frm.num.value;
+            var name = frm.name.value;
+            var attendance;
+            if (frm.attendance[0].checked) {
+                attendance = "出席";
+            } else if (frm.attendance[1].checked) {
+                attendance = "欠席";
+            }
+            mail.href = 'mailto:2014k-ikeda@takai-seminar.org?subject=卒業パーティー出欠&body=' + num + '%0d%0a' + name + '%0d%0a' + attendance + '%0d%0aこのまま送信してください。';
+        }
+    </script>
+</head>
+
+<body>
+
+    <form name="frm" action="">
+        <p>学籍番号:
+            <input type="text" name="num" value="">
+        </p>
+        <p>氏名:
+            <input type="text" name="name" value="">
+        </p>
+        <p>出欠:
+            <input type="radio" value="t" name="attendance">出席
+            <input type="radio" value="f" name="attendance">欠席
+        </p>
+        <input type="button" value="確認" onclick="javascript:chg();">
+    </form>
+    <a href="mailto:2014k-ikeda@takai-seminar.org?subject=卒業パーティー出欠&body=池田圭太%0d%0a出席" id="mail">メール送信</a>
+</body>
+
+</html>
