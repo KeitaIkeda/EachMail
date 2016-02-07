@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Office365登録フォーム</title>
+    <title>卒業パーティー出欠連絡</title>
     <meta content="width=device-width, initial-scale=1, user-scalable=no" name=viewport>
     <script>
         var chg = function () {
@@ -21,6 +21,14 @@
                 }
                 cnt++;
             }
+            if (!frm.attendance[0].checked && !frm.attendance[1].checked) {
+                if (cnt == 2 || cnt == 1) {
+                    alt += "・出欠"
+                } else {
+                    alt += "出欠"
+                }
+                cnt++;
+            }
             alt += "が未入力です。入力してください。"
             if (!(cnt == 0)) {
                 alert(alt);
@@ -30,8 +38,13 @@
                 } else {
                     var num = frm.num.value;
                     var name = frm.name.value;
-                    var sub = frm.sub.value;
-                    location.href = 'mailto:2014k-ikeda@takai-seminar.org?subject=Office365%E7%99%BB%E9%8C%B2&body=' + num + '%0d%0a' + name + '%0d%0a' + sub + '%0d%0a%e3%81%93%e3%81%ae%e3%81%be%e3%81%be%e9%80%81%e4%bf%a1%e3%81%97%e3%81%a6%e3%81%8f%e3%81%a0%e3%81%95%e3%81%84%e3%80%82';
+                    var attendance;
+                    if (frm.attendance[0].checked) {
+                        attendance = "%e5%87%ba%e5%b8%ad";
+                    } else if (frm.attendance[1].checked) {
+                        attendance = "%e6%ac%a0%e5%b8%ad";
+                    }
+                    location.href = 'mailto:2014k-ikeda@takai-seminar.org?subject=%e5%8d%92%e6%a5%ad%e3%83%91%e3%83%bc%e3%83%86%e3%82%a3%e3%83%bc%e5%87%ba%e6%ac%a0&body=' + num + '%0d%0a' + name + '%0d%0a' + attendance + '%0d%0a%e3%81%93%e3%81%ae%e3%81%be%e3%81%be%e9%80%81%e4%bf%a1%e3%81%97%e3%81%a6%e3%81%8f%e3%81%a0%e3%81%95%e3%81%84%e3%80%82';
                 }
             }
         }
@@ -52,8 +65,9 @@
             <p>氏名:
                 <input type="text" name="name" value="">
             </p>
-            <p>よみがな(フルネーム):
-                <input type="text" name="sub" value="">
+            <p>出欠:
+                <input type="radio" value="t" name="attendance">出席
+                <input type="radio" value="f" name="attendance">欠席
             </p>
             <input type="button" value="メール送信" onclick="javascript:chg();">
         </form>
